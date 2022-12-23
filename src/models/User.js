@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 //Clase del Schema de Users.
 const UserSchema = new Schema({
     name: { type: String, require: true},
-    email: {type: String, require: true},
+    email: {type: String, require: true, unique: true},
     password: {type: String, require: true}
 }, {
     timestamps: true
@@ -12,7 +12,7 @@ const UserSchema = new Schema({
 
 //Creamos o definimos un metodo para esta clase y poder encriptar la contraseña
 // Sintaxis = claseSchema + methods + nombredelmetodo_que quieras crear + function
-UserSchema.methods.encrypPassword = async password => {
+UserSchema.methods.encryptPassword = async password => {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
 };
