@@ -13,9 +13,11 @@
   </head>
   <body>
     {{!-- Exportamos el navbar, el > es para especificar el nombre del archivo que contiene el navbar --}}
+    {{!-- A la vez esto presenta el contenido exportado en la pagina --}}
     {{>navigation}}
 
     <main class="container p-5">
+      {{!-- Aqui tambien carga y muestra el contenido exportado en la pagina --}}
       {{>message}}
       {{>errors}}
       {{{body}}}

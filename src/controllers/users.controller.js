@@ -1,11 +1,15 @@
+//Creamos un objeto para guardar todas las funciones
 const usersCtrl = {};
 const User = require('../models/User');
+
 const passport = require('passport');
 
+//funcion para el get(ruta) de /users/signup
 usersCtrl.renderSignUpForm = (req, res) =>{
     res.render('users/signup');
 };
 
+//funcion para el post(ruta) de /users/signup
 usersCtrl.signup = async (req, res) => {
     const errors = [];
     const {name, email, password, confirm_password} = req.body;
@@ -32,20 +36,23 @@ usersCtrl.signup = async (req, res) => {
     }
 };
 
+//funcion para el get(ruta) de /users/signin
 usersCtrl.renderSigninForm = (req, res) =>{
     res.render('users/signin');
 };
 
+//funcion para el post(ruta) de /users/signin
 usersCtrl.signin = passport.authenticate('local', {
     failureRedirect: '/users/signin',
     successRedirect: '/notes',
     failureFlash: true
 });
 
+//funcion para el get(ruta) de /users/logout
 usersCtrl.logout = (req, res) => {
     req.logout(function(err) {
         if (err) { return next(err); }
-        req.flash('success', 'You are logged out now.');
+        req.flash('success_msg', 'You are logged out now.');
         res.redirect('/users/signin');
     });
 };
